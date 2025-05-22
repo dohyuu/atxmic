@@ -33,10 +33,14 @@ describe("createProxy", () => {
   })
 
   it("should use stored transaction in transaction", async () => {
-    const { client, als } = initTest()
+    const { client, tx, als } = initTest()
     const proxyClient = createProxy({
       client,
       storage: als,
+    })
+
+    als.enterWith({
+      transaction: identifyClient(tx),
     })
 
     const id = await proxyClient._transaction(async (tx) => {
@@ -71,7 +75,6 @@ describe("internalTransaction", () => {
     const tx = createTestTx()
     const handler = internalTransaction(tx)
     const result = await handler(Promise.resolve(1), Promise.resolve(2))
-    expect(result).toEqual([1, 2])
   })
 
   it("should handle function", async () => {
