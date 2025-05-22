@@ -1,11 +1,21 @@
+import type { PayloadOf, TransactionalClient } from "./types"
 import { isPromise } from "./utils/is-promise"
 
-export function createProxy(client) {
-  return new Proxy(client, {
-    get(target, prop, receiver) {
+export function createProxy<
+  T extends TransactionalClient<Tx>,
+  Tx extends Record<string, unknown>,
+>(client: PayloadOf<T, Tx>): T {
+  return new Proxy(client.client, {
+    get(_, prop, receiver) {
+      const tx = client.storage.getStore()?.transaction
+      if (prop === "_transaction" && tx) {
+        return internalTransaction(tx)
+      }
+
+      const target = client.storage.getStore()?.transaction || client.client
       return Reflect.get(target, prop, receiver)
     },
-  })
+  }) as unknown as T
 }
 
 export const internalTransaction = <Tx extends Record<string, unknown>>(
