@@ -1,4 +1,5 @@
 import { createStorage } from "../storage"
+import type { TransactionalClient } from "../types"
 
 export function createTestTx() {
   return {
@@ -8,7 +9,9 @@ export function createTestTx() {
   }
 }
 
-export function createTestClient(tx: ReturnType<typeof createTestTx>) {
+export type TestTx = ReturnType<typeof createTestTx>
+
+export function createTestClient(tx: TestTx): TransactionalClient<TestTx> {
   return {
     ...tx,
     _transaction: async <O>(fn: (payload: typeof tx) => Promise<O>) => {
@@ -17,15 +20,14 @@ export function createTestClient(tx: ReturnType<typeof createTestTx>) {
   }
 }
 
-export function createTestStorage(client: ReturnType<typeof createTestClient>) {
-  return createStorage<typeof client>()
+export function createTestStorage() {
+  return createStorage<TransactionalClient<TestTx>>()
 }
 
 export function initTest() {
   const tx = createTestTx()
   const client = createTestClient(tx)
-
-  const als = createTestStorage(client)
+  const als = createTestStorage()
 
   return {
     tx,
