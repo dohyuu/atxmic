@@ -5,7 +5,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "vitest"
   },
   "keywords": [],
   "author": "",
@@ -15,8 +15,6 @@
   },
   "packageManager": "pnpm@10.8.0",
   "devDependencies": {
-    "@biomejs/biome": "2.0.0-beta.5",
-    "@internals/biome-config": "workspace:*",
     "@internals/tsconfig": "workspace:*",
     "@types/node": "^22.15.21",
     "typescript": "^5.8.3",
