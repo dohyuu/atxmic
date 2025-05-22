@@ -1,0 +1,22 @@
+{
+  "name": "@internals/biome-config",
+  "version": "0.0.0",
+  "private": true,
+  "description": "",
+  "type": "module",
+  "exports": {
+    "/": "./biome.json"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "MIT",
+  "packageManager": "pnpm@10.8.0",
+  "devDependencies": {
+    "@biomejs/biome": "2.0.0-beta.5",
+    "@internals/tsconfig": "workspace:*",
+    "typescript": "^5.8.3"
+  }
+}
