@@ -1,5 +1,13 @@
 import { isPromise } from "./utils/is-promise"
 
+export function createProxy(client) {
+  return new Proxy(client, {
+    get(target, prop, receiver) {
+      return Reflect.get(target, prop, receiver)
+    },
+  })
+}
+
 export const internalTransaction = <Tx extends Record<string, unknown>>(
   tx: Tx,
 ) =>

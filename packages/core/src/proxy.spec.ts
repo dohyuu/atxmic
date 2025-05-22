@@ -1,11 +1,49 @@
+import { randomUUID } from "node:crypto"
 import { describe, expect, it } from "vitest"
-import { internalTransaction } from "./proxy"
-import { createTestTx } from "./utils/test"
+import { createProxy, internalTransaction } from "./proxy"
+import { identifyClient } from "./utils/identify"
+import { createTestTx, initTest } from "./utils/test"
 
 describe("createProxy", () => {
-  it("should use existing transaction", async () => {})
-  it("should use new transaction", async () => {})
-  it("should use stored transaction in transaction", async () => {})
+  it("should use existing transaction", async () => {
+    const { client, tx, als } = initTest()
+    const proxyClient = createProxy({
+      client,
+      storage: als,
+    })
+    const id = randomUUID()
+    const identified = identifyClient(tx, () => id)
+    als.enterWith({
+      transaction: identified,
+    })
+
+    const result = (proxyClient as any).id
+    expect(result).toBe(id)
+  })
+
+  it("should use new transaction", async () => {
+    const { client, als } = initTest()
+    const proxyClient = createProxy({
+      client,
+      storage: als,
+    })
+
+    const id = (proxyClient as any).id
+    expect(id).toBeUndefined()
+  })
+
+  it("should use stored transaction in transaction", async () => {
+    const { client, als } = initTest()
+    const proxyClient = createProxy({
+      client,
+      storage: als,
+    })
+
+    const id = await proxyClient._transaction(async (tx) => {
+      return (tx as any).id
+    })
+    expect(id).toBeDefined()
+  })
 })
 
 describe("internalTransaction", () => {
