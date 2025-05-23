@@ -1,32 +1,8 @@
-import { Inject, Injectable } from "@nestjs/common"
 import { Test, type TestingModule } from "@nestjs/testing"
 import { TransactionStorage, transaction } from "atxmic"
 import { describe, expect, it, vi } from "vitest"
 import { CLIENT_KEY } from "./constants"
-import { Transactional } from "./transactional"
-
-class Transaction {
-  async find() {
-    return "find"
-  }
-}
-
-@Injectable()
-class Client extends Transaction {
-  async $transaction<O>(fn: (tx: Transaction) => Promise<O>) {
-    return fn(this)
-  }
-}
-
-@Injectable()
-class TestService {
-  constructor(@Inject(CLIENT_KEY) private readonly client: Client) {}
-
-  @Transactional()
-  async test() {
-    return this.client.find()
-  }
-}
+import { TestClient, TestService } from "./test/utils"
 
 describe("Transational", () => {
   it("should call transaction function ", async () => {
@@ -37,7 +13,7 @@ describe("Transational", () => {
         TransactionStorage,
         {
           provide: CLIENT_KEY,
-          useClass: Client,
+          useClass: TestClient,
         },
       ],
     }).compile()
