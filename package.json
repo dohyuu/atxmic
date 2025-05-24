@@ -9,7 +9,7 @@
     "tsconfig": "pnpm --filter @internals/tsconfig",
     "core": "pnpm --filter atxmic",
     "nestjs": "pnpm --filter @atxmic/nestjs",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "vitest"
   },
   "keywords": [],
   "author": "",
