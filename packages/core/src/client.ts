@@ -1,3 +1,4 @@
+import { transaction } from "./transaction"
 import type { TransactionalClient, TransactionRunner } from "./types"
 
 export const createTransactionalClient = <
@@ -10,5 +11,6 @@ export const createTransactionalClient = <
   return {
     ...client,
     _transaction: transactionHandler,
+    _atomicTransaction: transaction,
   }
 }

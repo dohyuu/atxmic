@@ -1,4 +1,5 @@
 import type {
+  AtomicTransaction,
   Identified,
   PayloadOf,
   StorageValue,
@@ -7,7 +8,7 @@ import type {
 } from "./types"
 import { identifyClient } from "./utils/identify"
 
-export const transaction = async <
+export const transaction: AtomicTransaction = async <
   Client extends TransactionalClient<Tx>,
   Tx extends Record<string, unknown>,
   R,

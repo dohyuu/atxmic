@@ -20,7 +20,17 @@ export interface TransactionalClient<
   Tx extends Record<string, unknown> = Record<string, unknown>,
 > {
   _transaction: TransactionRunner<Tx>
+  _atomicTransaction: AtomicTransaction
 }
+
+export type AtomicTransaction = <
+  Client extends TransactionalClient<Tx>,
+  Tx extends Record<string, unknown>,
+  R,
+>(
+  payload: PayloadOf<Client, Tx>,
+  fn: TransactionCallback<Identified<Tx>, R>,
+) => Promise<R>
 
 export type Identified<T extends Record<string, unknown>> = T & {
   id: string
