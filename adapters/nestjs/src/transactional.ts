@@ -3,7 +3,6 @@ import {
   Propagation,
   type TransactionalClient,
   TransactionStorage,
-  transaction,
 } from "atxmic"
 import { CLIENT_KEY } from "./constants"
 
@@ -27,7 +26,7 @@ export function Transactional(
         storage: TransactionStorage<TransactionalClient>
       }
 
-      return transaction(
+      return client._atomicTransaction(
         {
           client,
           storage,
