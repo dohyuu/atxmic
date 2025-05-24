@@ -37,6 +37,9 @@ importers:
       '@types/node':
         specifier: ^22.15.21
         version: 22.15.21
+      tsup:
+        specifier: ^8.5.0
+        version: 8.5.0(jiti@2.4.2)(postcss@8.5.3)(typescript@5.8.3)
       typescript:
         specifier: ^5.8.3
         version: 5.8.3
@@ -71,6 +74,8 @@ importers:
       vitest:
         specifier: ^3.1.4
         version: 3.1.4(@types/node@22.15.21)(jiti@2.4.2)
+
+  examples/nestjs-prisma: {}
 
   internals/tsconfig: {}
 
