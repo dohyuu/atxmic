@@ -15,7 +15,10 @@
   "packageManager": "pnpm@10.8.0",
   "devDependencies": {
     "@internals/tsconfig": "workspace:^",
+    "@nestjs/platform-express": "^11.1.1",
     "@types/node": "^22.15.21",
+    "@types/supertest": "^6.0.3",
+    "supertest": "^7.1.1",
     "tsup": "^8.5.0",
     "typescript": "^5.8.3",
     "vitest": "^3.1.4"
