@@ -1,8 +1,6 @@
 import type { JsPromise, UnwrapTuple } from "@prisma/client/runtime/library"
 
-export interface PrismaClientLike<
-  Tx extends Record<string, unknown> = Record<string, unknown>,
-> {
+export interface PrismaClientLike<Tx extends object = object> {
   $transaction<P extends PrismaPromiseLike<any>[]>(
     arg: [...P],
     options?: { isolationLevel?: string },
@@ -25,3 +23,5 @@ export type PrismaTransactionOf<T extends PrismaClientLike> = Parameters<
 export declare interface PrismaPromiseLike<T> extends Promise<T> {
   [Symbol.toStringTag]: "PrismaPromise"
 }
+
+export type IsClass<T> = T extends new (...args: any[]) => any ? true : false
