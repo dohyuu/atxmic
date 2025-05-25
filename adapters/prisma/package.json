@@ -1,13 +1,14 @@
 {
   "name": "@atxmic/prisma",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "",
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
   "types": "./dist/index.d.ts",
   "scripts": {
     "test": "vitest",
-    "build": "tsup src/index.ts --clean --dts --format esm,cjs"
+    "build": "tsup src/index.ts --clean --dts --format esm,cjs",
+    "prepublishOnly": "pnpm build"
   },
   "keywords": [],
   "author": "",
