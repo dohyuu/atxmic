@@ -8,6 +8,7 @@
     "biome-config": "pnpm --filter @internals/biome-config",
     "tsconfig": "pnpm --filter @internals/tsconfig",
     "core": "pnpm --filter atxmic",
+    "prisma": "pnpm --filter @atxmic/prisma",
     "nestjs": "pnpm --filter @atxmic/nestjs",
     "test": "vitest"
   },
