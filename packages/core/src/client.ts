@@ -1,10 +1,7 @@
 import { transaction } from "./transaction"
 import type { TransactionalClient, TransactionRunner } from "./types"
 
-export const createTransactionalClient = <
-  Client,
-  Tx extends Record<string, unknown>,
->(
+export const createTransactionalClient = <Client, Tx extends object>(
   client: Client,
   transactionHandler: TransactionRunner<Tx>,
 ): Client & TransactionalClient<Tx> => {

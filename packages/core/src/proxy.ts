@@ -3,7 +3,7 @@ import { isPromise } from "./utils/is-promise"
 
 export function createProxy<
   T extends TransactionalClient<Tx>,
-  Tx extends Record<string, unknown>,
+  Tx extends object,
 >(client: PayloadOf<T, Tx>): T {
   return new Proxy(client.client, {
     get(_, prop, receiver) {
@@ -18,9 +18,7 @@ export function createProxy<
   }) as unknown as T
 }
 
-export const internalTransaction = <Tx extends Record<string, unknown>>(
-  tx: Tx,
-) =>
+export const internalTransaction = <Tx extends object>(tx: Tx) =>
   async function _transaction<T>(
     callback:
       | Promise<T>

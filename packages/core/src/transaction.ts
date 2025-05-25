@@ -10,7 +10,7 @@ import { identifyClient } from "./utils/identify"
 
 export const transaction: AtomicTransaction = async <
   Client extends TransactionalClient<Tx>,
-  Tx extends Record<string, unknown>,
+  Tx extends object,
   R,
 >(
   payload: PayloadOf<Client, Tx>,
