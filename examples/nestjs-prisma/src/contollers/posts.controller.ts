@@ -39,10 +39,7 @@ export class PostsController {
     },
     @Body() body: UpdatePostDto,
   ) {
-    const post = await this.postService.method_scoped_transaction(
-      params.id,
-      body,
-    )
+    const post = await this.postService.updatePost(params.id, body)
 
     return {
       data: post,
