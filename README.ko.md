@@ -1,12 +1,12 @@
 # Atxmic
 
-> Documentation is currently being written.  
-  The API may change during development as it is still actively being developed.
+> 문서는 현재 작성중입니다.
+> 아직 활발히 개발 중이므로 API가 도중에 변경될 수 있습니다.
 
-**Atxmic** is a library that allows atomic management of database transactions.
+**Atxmic**은 데이터베이스 트랜잭션을 원자적으로 관리할 수 있는 라이브러리입니다.
 
 
-## Using with Prisma in NestJS
+## Nestjs에서 Prisma와 함께 사용
 
 ```bash
 pnpm add atxmic
@@ -64,10 +64,10 @@ export class PostsController {
 }
 ```
 
-## Roadmap
+## Loadmap
 
-- [ ] TypeORM support
-- [ ] Sequelize support
-- [ ] Drizzle support
-- [ ] Add Express examples
-- [ ] Distributed transaction support 
+- [ ] Typeorm 지원
+- [ ] Sequelize 지원
+- [ ] Drizzle 지원
+- [ ] Express 예제 추가
+- [ ] 분산 트랜잭션 지원
