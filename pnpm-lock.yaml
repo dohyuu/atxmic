@@ -89,6 +89,9 @@ importers:
       '@atxmic/nestjs':
         specifier: workspace:*
         version: link:../../adapters/nestjs
+      '@atxmic/prisma':
+        specifier: workspace:*
+        version: link:../../adapters/prisma
       '@nestjs/common':
         specifier: ^11.1.1
         version: 11.1.1(reflect-metadata@0.2.2)(rxjs@7.8.2)

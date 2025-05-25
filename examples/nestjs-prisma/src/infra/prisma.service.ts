@@ -1,17 +1,13 @@
+import { prismaAdapter } from "@atxmic/prisma"
 import { Injectable, type OnModuleInit } from "@nestjs/common"
-import { type Prisma, PrismaClient } from "@prisma/client"
-import type { TransactionalClient } from "atxmic"
+import { PrismaClient } from "@prisma/client"
 
 @Injectable()
 export class PrismaService
-  extends PrismaClient
-  implements OnModuleInit, TransactionalClient
+  extends prismaAdapter(PrismaClient)
+  implements OnModuleInit
 {
   async onModuleInit() {
     await this.$connect()
-  }
-
-  async _transaction<O>(fn: (tx: Prisma.TransactionClient) => Promise<O>) {
-    return this.$transaction(fn)
   }
 }
