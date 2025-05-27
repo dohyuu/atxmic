@@ -64,7 +64,7 @@ export class PostsController {
 }
 ```
 
-## Loadmap
+## 로드맵
 
 - [ ] Typeorm 지원
 - [ ] Sequelize 지원
