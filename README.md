@@ -1,9 +1,21 @@
-# Atxmic
-
 > Documentation is currently being written.  
   The API may change during development as it is still actively being developed.
 
-**A`tx`mic** is a library that allows atomic management of database transactions.
+<br/>
+<p align=center>
+<picture>
+  <source width="300" media="(prefers-color-scheme: dark)" srcset="./assets/atxmic-logo-dark.svg">
+  <source width="300" media="(prefers-color-scheme: light)" srcset="./assets/atxmic-logo-light.svg">
+  <img alt="IMAGE" width="300" src="./assets/atxmic-logo-light.svg">
+</picture>
+<br/>
+<br/>
+Atxmic, The Atomic Transaction Management
+</p>
+<br/>
+<br/>
+
+**Atxmic** is a library that allows atomic management of database transactions.
 
 
 ## Using with Prisma in NestJS
