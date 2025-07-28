@@ -27,10 +27,43 @@ pnpm add @atxmic/nestjs
 ```
 
 ```typescript
+// examples/nestjs-prisma/src/infra/prisma.service.ts
+import { prismaAdapter } from "@atxmic/prisma"
+import { Injectable, type OnModuleInit } from "@nestjs/common"
+import { PrismaClient } from "@prisma/client"
+
+@Injectable()
+export class PrismaService
+  extends prismaAdapter(PrismaClient)
+  implements OnModuleInit
+{
+  async onModuleInit() {
+    await this.$connect()
+  }
+}
+```
+
+```typescript
+// examples/nestjs-prisma/src/infra/prisma.module.ts
+import { Module } from "@nestjs/common"
+import { PrismaService } from "./prisma.service"
+
+@Module({
+  providers: [PrismaService],
+  exports: [PrismaService],
+})
+export class PrismaModule {}
+```
+
+```typescript
 // examples/nestjs-prisma/src/app.module.ts
 import { TransactionModule } from "@atxmic/nestjs"
 import { Module } from "@nestjs/common"
+import { PostsController } from "./controllers/posts.controller"
+import { PrismaModule } from "./infra/prisma.module"
 import { PrismaService } from "./infra/prisma.service"
+import { PostService } from "./services/post.service"
+import { UserService } from "./services/user.service"
 
 @Module({
   imports: [
@@ -40,20 +73,23 @@ import { PrismaService } from "./infra/prisma.service"
     }),
   ],
   controllers: [PostsController],
-  providers: [PostService],
+  providers: [PostService, UserService],
 })
 export class AppModule {}
 ```
 
 ```typescript
-// examples/nestjs-prisma/src/posts.controller.ts
+// examples/nestjs-prisma/src/controllers/posts.controller.ts
 import { Transactional } from "@atxmic/nestjs"
 import { Body, Controller, Post } from "@nestjs/common"
+import { PostService } from "../services/post.service"
+import { UserService } from "../services/user.service"
 
 @Controller("posts")
 export class PostsController {
   constructor(
     private readonly postService: PostService,
+    private readonly userService: UserService,
   ) {}
 
   @Post()
